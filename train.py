@@ -36,14 +36,7 @@ if __name__ == '__main__':
         "val": transforms.Compose([
                                    transforms.ToTensor(),
                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])}
-        # "train": transforms.Compose([transforms.RandomResizedCrop(224),
-        #                              transforms.RandomHorizontalFlip(),
-        #                              transforms.ToTensor(),
-        #                              transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])]),
-        # "val": transforms.Compose([transforms.Resize(256),
-        #                            transforms.CenterCrop(224),
-        #                            transforms.ToTensor(),
-        #                            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])}
+ 
 
     train_dataset = datasets.ImageFolder("./data/train/", transform=data_transform["train"])  # 训练集数据
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, shuffle=True,
@@ -56,9 +49,9 @@ if __name__ == '__main__':
 
     net = LeNet()
     loss_function = nn.CrossEntropyLoss()  # 设置损失函数
-    # optimizer = optim.Adam(net.parameters(), lr=0.003,weight_decay=1e-5,amsgrad=True)  # 设置优化器和学习率
-    optimizer = optim.Adam(net.parameters(), lr=0.003, weight_decay=1e-5,amsgrad=True)  # 设置优化器和学习率
-    # optimizer = optim.Adam(net.parameters(), lr=0.003)  # 设置优化器和学习率
+  
+    # optimizer = optim.Adam(net.parameters(), lr=0.003, weight_decay=1e-5,amsgrad=True)  # 设置优化器和学习率
+    optimizer = optim.Adam(net.parameters(), lr=0.003)  # 设置优化器和学习率
     epoch = 50
 
     history = train_and_val(epoch, net, train_loader, len_train,val_loader, len_val,loss_function, optimizer,device)
